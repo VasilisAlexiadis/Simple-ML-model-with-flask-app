@@ -17,14 +17,21 @@ def predict():
     sepal_width = request.args.get('sepal_width')
     petal_length = request.args.get('petal_length')
     petal_width = request.args.get('petal_width')
-    prediction = model.predict([[float(sepal_length), float(sepal_width), float(petal_length), float(petal_width)]])
-    return jsonify({'prediction': str(list(prediction)[0])})
+    prediction = model.predict([[sepal_length, sepal_width, petal_length, petal_width]])
+    return 'prediction is'+ str(prediction)
 
 # @app.route('/predict', methods=['POST'])
 # def predict():
 #     data = request.get_json()
 #     prediction = model.predict(pd.DataFrame([data]))
 #     return jsonify({'prediction': list(prediction)})
+
+@app.route('/predict', methods=['POST'])
+def predict_file():
+    data = pd.read_csv(request.files.get('file'))
+    prediction = model.predict(data) 
+    return 'predictions for the csv is' + str(list(prediction))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
