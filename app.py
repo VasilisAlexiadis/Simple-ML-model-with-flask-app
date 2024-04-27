@@ -27,7 +27,7 @@ def predict():
 #     return jsonify({'prediction': list(prediction)})
 
 @app.route('/predict_file', methods=['POST'])
-def predict():
+def predict_file():
     data = pd.read_csv(request.files.get('file'))
     prediction = model.predict(data) 
     return 'predictions for the csv is' + str(list(prediction))
