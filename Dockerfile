@@ -1,5 +1,8 @@
-FROM alpine:3.14
-COPY . /app_copy
+FROM python:3.19-slim
+
 WORKDIR /app_copy
-RUN pip install -r requirements.txt
+COPY . /app_copy
+RUN pip install -r req.txt
 CMD python app_copy.py
+
+
